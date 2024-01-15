@@ -18,6 +18,29 @@
 	"activationEvents": [
 		"*"
 	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "asm",
+				"aliases": [
+					"65816 Assembly",
+					"asm",
+					"Assembly"
+				],
+				"extensions": [
+					".asm"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "asm",
+				"scopeName": "source.asm.65816",
+				"path": "./syntaxes/65816.tmLanguage"
+			}
+		]
+	},
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
