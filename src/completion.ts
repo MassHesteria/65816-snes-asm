@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import asm from "./asm";
 
 export const getSampleProvider1 = {
   provideCompletionItems(
@@ -75,3 +76,18 @@ export const getSampleProvider2 = {
     ];
   },
 };
+
+export const opcodeCompletionProvider = {
+  provideCompletionItems(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    token: vscode.CancellationToken,
+    context: vscode.CompletionContext
+  ) {
+    return asm.opcodes.map((op) => {
+      const item = new vscode.CompletionItem(op.name);
+      item.documentation = op.description;
+      return item;
+    })
+  }
+}
