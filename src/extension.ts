@@ -4,7 +4,7 @@
 
 import * as vscode from "vscode";
 import { getSampleProvider1, getSampleProvider2, opcodeCompletionProvider } from "./completion";
-import { sampleHoverProvider, opcodeHoverProvider } from "./hover";
+import { opcodeHoverProvider } from "./hover";
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
@@ -13,9 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
     ),
     vscode.languages.registerCompletionItemProvider(
       "plaintext", getSampleProvider2, "." // triggered whenever a '.' is being typed
-    ),
-    vscode.languages.registerHoverProvider(
-      "plaintext", sampleHoverProvider
     ),
     vscode.languages.registerCompletionItemProvider(
       "asm", opcodeCompletionProvider

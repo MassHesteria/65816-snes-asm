@@ -1,17 +1,24 @@
 import * as vscode from "vscode";
 import asm from "./asm";
 
-export const sampleHoverProvider: vscode.HoverProvider = {
-  provideHover(
-    document: vscode.TextDocument,
-    position: vscode.Position,
-    token: vscode.CancellationToken
-  ): vscode.Hover | Thenable<vscode.Hover> {
-    // Your hover text logic here
-    const hoverText = new vscode.MarkdownString("This is hover text");
-    return new vscode.Hover(hoverText);
-  },
-};
+//------------------------------------------------------
+// Build a list of "per opcode" documentation once
+//------------------------------------------------------
+
+const docs: { code: string; docs: string }[] = [];
+
+Object.entries(asm.docs).forEach(d => {
+  d[0].split(' ').forEach(c => {
+    docs.push({
+      code: c,
+      docs: d[1]
+    })
+  })
+});
+
+//------------------------------------------------------
+// Handle hovering over opcodes
+//------------------------------------------------------
 
 export const opcodeHoverProvider: vscode.HoverProvider = {
   provideHover(
@@ -22,18 +29,6 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
     // Get the word under the cursor
     const wordRange = document.getWordRangeAtPosition(position);
     const word = wordRange ? document.getText(wordRange) : "";
-
-    const docs: { code: string; docs: string }[] = [];
-
-    Object.entries(asm.docs).forEach(d => {
-      const codes = d[0].split(' ');
-      codes.forEach(c => {
-        docs.push({
-          code: c,
-          docs: d[1]
-        })
-      })
-    })
 
     // Define hover content based on the word
     let hoverText = "";
