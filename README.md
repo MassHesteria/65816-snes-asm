@@ -6,7 +6,7 @@ This extension provides the following features for 65816 Assembly targeting the 
 - Opcode Documentation via Hover
 - ASAR Syntax Autocompletion
 
-Additionally, documentation when hovering over addresses ($09A6, $8098B4, etc.) can be enabled for the following games:
+Additionally, documentation when hovering over addresses (`$09A6`, `$8098B4`, etc.) can be enabled for the following games:
 - Super Metroid
 - Super Mario World (TBD)
 
