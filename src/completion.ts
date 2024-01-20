@@ -86,7 +86,7 @@ export const opcodeCompletionProvider = {
   ) {
     return asm.opcodes.map((op) => {
       const item = new vscode.CompletionItem(op.name);
-      item.documentation = op.description;
+      item.detail = op.description;
       return item;
     })
   }

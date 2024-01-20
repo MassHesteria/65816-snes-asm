@@ -1,5 +1,7 @@
 import * as vscode from "vscode";
 import asm from "./asm";
+import { ramSuperMetroid } from "./ramSuperMetroid";
+import { RamAddress } from "./ram";
 
 //------------------------------------------------------
 // Build a list of "per opcode" documentation once
@@ -17,6 +19,17 @@ Object.entries(asm.docs).forEach(d => {
 });
 
 //------------------------------------------------------
+//
+//------------------------------------------------------
+
+const getText = (name: string, description?: string) => {
+  if (description == undefined) {
+    return name;
+  }
+  return name + "  \n  \n" + description;
+}
+
+//------------------------------------------------------
 // Handle hovering over opcodes
 //------------------------------------------------------
 
@@ -32,14 +45,17 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
 
     // Define hover content based on the word
     let hoverText = "";
-    const h = docs.find(p => p.code == word);
-    if (h != undefined) {
-      hoverText = h.docs;
+    const a = asm.opcodes.find(p => p.name == word);
+    if (a != undefined) {
+      const h = docs.find(p => p.code == word);
+      if (h != undefined) {
+        hoverText = getText(a.description,h.docs);
+      }
     } else {
       const config = vscode.workspace.getConfiguration("65816Snes");
       const gameSupport = config.get<string>("gameSupport", "none");
       if (gameSupport == "Super Metroid") {
-        hoverText = getSuperMetroidHoverText(document, position);
+        hoverText = getRamHoverText(document, position, ramSuperMetroid);
       }
     }
 
@@ -49,18 +65,36 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
   },
 };
 
-const getSuperMetroidHoverText = (
+const getRamHoverText = (
   document: vscode.TextDocument,
-  position: vscode.Position
+  position: vscode.Position,
+  ramData: RamAddress[]
 ): string => {
-  const wordRange = document.getWordRangeAtPosition(position);
-  const word = wordRange ? document.getText(wordRange) : "";
   let hoverText = "";
-  if (word == "$09A6") {
-    hoverText = "Equipped Items"
+
+  const fourDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{4}\b/);
+  if (fourDigits) {
+    const word = document.getText(fourDigits).toLowerCase();
+    const data = ramData.find(p => {
+      const temp = "$" + (p.address & 0xFFFF).toString(16).padStart(4, "0");
+      return word == temp;
+    });
+    if (data != undefined) {
+      hoverText = getText(data.description, data.notes);
+    }
   }
-  if (word == "09A6") {
-    hoverText = "test Equipped Items"
+
+  const sixDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{6}\b/);
+  if (sixDigits) {
+    const word = document.getText(sixDigits).toLowerCase();
+    const data = ramData.find(p => {
+      const temp = "$" + p.address.toString(16);
+      return word == temp;
+    });
+    if (data != undefined) {
+      hoverText = getText(data.description, data.notes);
+    }
   }
+
   return hoverText;
 };

@@ -8,12 +8,12 @@ import { opcodeHoverProvider } from "./hover";
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(
+    /*vscode.languages.registerCompletionItemProvider(
       "plaintext", getSampleProvider1
     ),
     vscode.languages.registerCompletionItemProvider(
       "plaintext", getSampleProvider2, "." // triggered whenever a '.' is being typed
-    ),
+    ),*/
     vscode.languages.registerCompletionItemProvider(
       "asm", opcodeCompletionProvider
     ),

@@ -1,4 +1,14 @@
-const asm = {
+type Keyword = {
+  name: string;
+  description: string;
+  allowLength?: boolean;
+}
+
+type StringObject = {
+  [key: string]: string
+}
+
+const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = {
   syntax: [
     {
       defaultslot: "",
@@ -143,10 +153,12 @@ const asm = {
     {
       name: "ADC",
       description: "Add with Carry",
+      allowLength: true
     },
     {
       name: "AND",
       description: "AND Accumulator",
+      allowLength: true
     },
     {
       name: "ASL",
@@ -279,14 +291,17 @@ const asm = {
     {
       name: "LDA",
       description: "Load Accumulator",
+      allowLength: true
     },
     {
       name: "LDX",
       description: "Load X",
+      allowLength: true
     },
     {
       name: "LDY",
       description: "Load Y",
+      allowLength: true
     },
     {
       name: "LSR",
