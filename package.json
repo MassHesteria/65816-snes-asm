@@ -2,7 +2,7 @@
 	"name": "65816-snes-asm",
 	"displayName": "65816/SNES Assembly",
 	"version": "0.0.3",
-	"publisher": "",
+	"publisher": "MassHesteria",
 	"private": true,
 	"license": "MIT",
 	"repository": {
@@ -12,18 +12,24 @@
 	"engines": {
 		"vscode": "^1.75.0"
 	},
+	"activationEvents": [
+		"onLanguage:asm"
+	],
 	"categories": [
-		"Other"
+		"Programming Languages"
 	],
 	"contributes": {
-		"configuration":[
+		"configuration": [
 			{
 				"title": "65816/SNES",
 				"properties": {
 					"65816Snes.gameSupport": {
 						"type": "string",
 						"default": "Super Metroid",
-						"enum": ["none", "Super Metroid"],
+						"enum": [
+							"none",
+							"Super Metroid"
+						],
 						"description": "Hover documentation for RAM/ROM addresses in SNES games."
 					}
 				}
