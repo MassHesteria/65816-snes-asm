@@ -61,6 +61,7 @@
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
+		"build": "tsc src/build.ts --outDir ./out && node ./out/build.js",
 		"compile": "tsc -p ./",
 		"lint": "eslint \"src/**/*.ts\"",
 		"watch": "tsc -watch -p ./"

@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import asm from "./asm";
 import { ramSuperMetroid } from "./ramSuperMetroid";
-import { RamAddress } from "./ram";
+import { getRamText, RamAddress } from "./ram";
 
 //------------------------------------------------------
 // Build a list of "per opcode" documentation once
@@ -80,7 +80,7 @@ const getRamHoverText = (
       return word == temp;
     });
     if (data != undefined) {
-      hoverText = getText(data.description, data.notes);
+      hoverText = getRamText(data);
     }
   }
 
@@ -92,7 +92,7 @@ const getRamHoverText = (
       return word == temp;
     });
     if (data != undefined) {
-      hoverText = getText(data.description, data.notes);
+      hoverText = getRamText(data);
     }
   }
 
