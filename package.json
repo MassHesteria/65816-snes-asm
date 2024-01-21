@@ -2,6 +2,7 @@
 	"name": "65816-snes-asm",
 	"displayName": "65816/SNES Assembly",
 	"version": "0.0.3",
+   "icon": "images/icon.png",
 	"publisher": "MassHesteria",
 	"private": true,
 	"license": "MIT",
