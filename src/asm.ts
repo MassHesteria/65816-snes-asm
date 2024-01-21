@@ -179,6 +179,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "BIT",
       description: "Bit Test",
+      allowLength: true,
     },
     {
       name: "BMI",
@@ -231,6 +232,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "CMP",
       description: "Compare Accumulator",
+      allowLength: true,
     },
     {
       name: "COP",
@@ -239,14 +241,17 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "CPX",
       description: "Compare X",
+      allowLength: true,
     },
     {
       name: "CPY",
       description: "Compare Y",
+      allowLength: true,
     },
     {
       name: "DEC",
       description: "Decrease Accumulator",
+      allowLength: true,
     },
     {
       name: "DEX",
@@ -263,6 +268,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "INC",
       description: "Increase Accumulator",
+      allowLength: true,
     },
     {
       name: "INX",
@@ -279,6 +285,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "JMP",
       description: "Jump",
+      allowLength: true,
     },
     {
       name: "JSL",
@@ -287,6 +294,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "JSR",
       description: "Jump to Subroutine",
+      allowLength: true,
     },
     {
       name: "LDA",
@@ -306,6 +314,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "LSR",
       description: "Logical Shift Right",
+      allowLength: true,
     },
     {
       name: "MVN",
@@ -322,10 +331,12 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "ORA",
       description: "OR Accumulator",
+      allowLength: true,
     },
     {
       name: "PEA",
       description: "Push Effective Address",
+      allowLength: true,
     },
     {
       name: "PEI",
@@ -394,10 +405,12 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "ROL",
       description: "Rotate Left",
+      allowLength: true,
     },
     {
       name: "ROR",
       description: "Rotate Right",
+      allowLength: true,
     },
     {
       name: "RTI",
@@ -414,6 +427,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "SBC",
       description: "Subtract with Carry",
+      allowLength: true,
     },
     {
       name: "SEC",
@@ -434,6 +448,7 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "STA",
       description: "Store Accumulator",
+      allowLength: true,
     },
     {
       name: "STP",
@@ -442,14 +457,17 @@ const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = 
     {
       name: "STX",
       description: "Store X",
+      allowLength: true,
     },
     {
       name: "STY",
       description: "Store Y",
+      allowLength: true,
     },
     {
       name: "STZ",
       description: "Store Zero",
+      allowLength: true,
     },
     {
       name: "TAX",
