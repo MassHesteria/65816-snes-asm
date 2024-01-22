@@ -105,9 +105,9 @@
 			<key>comment</key>
 			<string>Preprocessor</string>
 			<key>match</key>
-			<string>\b(assume|base|cleartable|db|dd|dl|dw|macro|endmacro|export|fill|fillbyte|fsave|header|hirom|import|incbin|incbin_table|incsrc|loadpc|lorom|macro name|namespace|org|pad|padbyte|print|savepc|skip|table|warnpc|ASSUME|BASE|CLEARTABLE|DB|DD|DL|DW|MACRO|ENDMACRO|EXPORT|FILL|FILLBYTE|FSAVE|HEADER|HIROM|IMPORT|INCBIN|INCBIN_TABLE|INCSRC|LOADPC|LOROM|MACRO NAME|NAMESPACE|ORG|PAD|PADBYTE|PRINT|SAVEPC|SKIP|TABLE|WARNPC)\b</string>
+			<string>\b(assume|bank|base|cleartable|db|dd|dl|dpbase|dw|macro|endmacro|export|fill|fillbyte|fsave|header|hirom|import|incbin|incbin_table|incsrc|loadpc|lorom|macro name|namespace|org|pad|padbyte|print|savepc|skip|table|warnpc|ASSUME|BANK|BASE|CLEARTABLE|DB|DD|DL|DPBASE|DW|MACRO|ENDMACRO|EXPORT|FILL|FILLBYTE|FSAVE|HEADER|HIROM|IMPORT|INCBIN|INCBIN_TABLE|INCSRC|LOADPC|LOROM|MACRO NAME|NAMESPACE|ORG|PAD|PADBYTE|PRINT|SAVEPC|SKIP|TABLE|WARNPC)\b</string>
 			<key>name</key>
-			<string>keyword.xkas.asm</string>
+			<string>keyword.asar.asm</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -131,23 +131,23 @@
 			<key>match</key>
 			<string>#\$[a-fA-F0-9]+</string>
 			<key>name</key>
-			<string>constant.xkas.numeric.hexvalue</string>
+			<string>constant.asar.numeric.hexvalue</string>
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>Hex Value</string>
+			<string>Decimal Value</string>
 			<key>match</key>
 			<string>#[0-9]+</string>
 			<key>name</key>
-			<string>constant.xkas.numeric.decvalue</string>
+			<string>constant.asar.numeric.decvalue</string>
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>Hex Value</string>
+			<string>Binary Value</string>
 			<key>match</key>
 			<string>%[0-1]+</string>
 			<key>name</key>
-			<string>constant.xkas.numeric.binvalue</string>
+			<string>constant.asar.numeric.binvalue</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -155,7 +155,7 @@
 			<key>match</key>
 			<string>\b[0-9]+\b</string>
 			<key>name</key>
-			<string>constant.xkas.numeric.dec</string>
+			<string>constant.asar.numeric.dec</string>
 		</dict>
 		<dict>
 			<key>comment</key>

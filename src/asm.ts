@@ -8,145 +8,107 @@ type StringObject = {
   [key: string]: string
 }
 
-const asm: { syntax: StringObject[]; opcodes: Keyword[]; docs: StringObject } = {
+const asm: { syntax: Keyword[]; opcodes: Keyword[]; docs: StringObject } = {
   syntax: [
     {
-      defaultslot: "",
+      name: "arch",
+      description: `Architecture  [65816=default,spc700,spc700-inline,superfx]`,
     },
     {
-      slotsize: "",
+      name: "defaultslot",
+      description: "",
     },
     {
-      slot: "",
+      name: "slotsize",
+      description: "",
     },
     {
-      id: "",
+      name: "slot",
+      description: "",
     },
     {
-      name: "",
+      name: "id",
+      description: "",
     },
     {
-      slowrom: "",
+      name: "name",
+      description: "",
     },
     {
-      lorom: "",
+      name: "slowrom",
+      description: "",
     },
     {
-      hirom: "",
+      name: "lorom",
+      description: "",
     },
     {
-      cartridgetype: "",
+      name: "hirom",
+      description: "",
     },
     {
-      romsize: "",
+      name: "cartridgetype",
+      description: "",
     },
     {
-      sramsize: "",
+      name: "romsize",
+      description: "",
     },
     {
-      country: "",
+      name: "sramsize",
+      description: "",
     },
     {
-      licenseecode: "",
+      name: "country",
+      description: "",
     },
     {
-      version: "",
+      name: "licenseecode",
+      description: "",
     },
     {
-      cop: "",
+      name: "version",
+      description: "",
     },
     {
-      brk: "",
+      name: "cop",
+      description: "",
     },
     {
-      abort: "",
+      name: "brk",
+      description: "",
     },
     {
-      nmi: "",
+      name: "abort",
+      description: "",
     },
     {
-      irq: "",
+      name: "nmi",
+      description: "",
     },
     {
-      reset: "",
+      name: "irq",
+      description: "",
     },
     {
-      irqbrk: "",
+      name: "reset",
+      description: "",
     },
     {
-      semifree: "",
+      name: "irqbrk",
+      description: "",
     },
     {
-      header_off: "",
+      name: "semifree",
+      description: "",
     },
     {
-      force: "",
+      name: "header_off",
+      description: "",
     },
     {
-      DEFAULTSLOT: "",
-    },
-    {
-      SLOTSIZE: "",
-    },
-    {
-      SLOT: "",
-    },
-    {
-      ID: "",
-    },
-    {
-      NAME: "",
-    },
-    {
-      SLOWROM: "",
-    },
-    {
-      LOROM: "",
-    },
-    {
-      HIROM: "",
-    },
-    {
-      CARTRIDGETYPE: "",
-    },
-    {
-      ROMSIZE: "",
-    },
-    {
-      SRAMSIZE: "",
-    },
-    {
-      COUNTRY: "",
-    },
-    {
-      LICENSEECODE: "",
-    },
-    {
-      VERSION: "",
-    },
-    {
-      ABORT: "",
-    },
-    {
-      NMI: "",
-    },
-    {
-      IRQ: "",
-    },
-    {
-      RESET: "",
-    },
-    {
-      IRQBRK: "",
-    },
-    {
-      SEMIFREE: "",
-    },
-    {
-      HEADER_OFF: "",
-    },
-    {
-      FORCE: "",
+      name: "force",
+      description: "",
     },
   ],
   opcodes: [
