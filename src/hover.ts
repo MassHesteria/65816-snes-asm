@@ -65,6 +65,12 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
   },
 };
 
+const getPreviousCharacter = (document: vscode.TextDocument, range: vscode.Range) => {
+  const startPosition = new vscode.Position(range.start.line, range.start.character - 1);
+  const beforeRange = new vscode.Range(startPosition, range.start);
+  return document.getText(beforeRange);
+}
+
 const getRamHoverText = (
   document: vscode.TextDocument,
   position: vscode.Position,
@@ -73,7 +79,7 @@ const getRamHoverText = (
   let hoverText = "";
 
   const fourDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{4}\b/);
-  if (fourDigits) {
+  if (fourDigits && '#' != getPreviousCharacter(document, fourDigits)) {
     const word = document.getText(fourDigits).toLowerCase();
     const data = ramData.find(p => {
       const temp = "$" + (p.address & 0xFFFF).toString(16).padStart(4, "0");
@@ -85,7 +91,7 @@ const getRamHoverText = (
   }
 
   const sixDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{6}\b/);
-  if (sixDigits) {
+  if (sixDigits && '#' != getPreviousCharacter(document, sixDigits)) {
     const word = document.getText(sixDigits).toLowerCase();
     const data = ramData.find(p => {
       const temp = "$" + p.address.toString(16);
