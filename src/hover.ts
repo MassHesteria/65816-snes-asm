@@ -71,6 +71,16 @@ const getPreviousCharacter = (document: vscode.TextDocument, range: vscode.Range
   return document.getText(beforeRange);
 }
 
+const getRamAddresses = (entry: RamAddress, mask: number) => {
+  const options: string[] = [];
+  const padNum = mask.toString(16).length;
+  for (let i = 0; i < entry.length; i++) {
+    const addr = (entry.address + i) & mask;
+    options.push("$" + addr.toString(16).padStart(padNum, "0"));
+  }
+  return options;
+}
+
 const getRamHoverText = (
   document: vscode.TextDocument,
   position: vscode.Position,
@@ -81,10 +91,7 @@ const getRamHoverText = (
   const fourDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{4}\b/);
   if (fourDigits && '#' != getPreviousCharacter(document, fourDigits)) {
     const word = document.getText(fourDigits).toLowerCase();
-    const data = ramData.find(p => {
-      const temp = "$" + (p.address & 0xFFFF).toString(16).padStart(4, "0");
-      return word == temp;
-    });
+    const data = ramData.find(p => getRamAddresses(p, 0xFFFF).includes(word));
     if (data != undefined) {
       hoverText = getRamText(data);
     }
@@ -93,10 +100,7 @@ const getRamHoverText = (
   const sixDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{6}\b/);
   if (sixDigits && '#' != getPreviousCharacter(document, sixDigits)) {
     const word = document.getText(sixDigits).toLowerCase();
-    const data = ramData.find(p => {
-      const temp = "$" + p.address.toString(16);
-      return word == temp;
-    });
+    const data = ramData.find(p => getRamAddresses(p, 0xFFFFFF).includes(word));
     if (data != undefined) {
       hoverText = getRamText(data);
     }
