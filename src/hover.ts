@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import asm from "./asm";
 import { ramSuperMetroid } from "./ramSuperMetroid";
-import { getRamText, RamAddress } from "./ram";
+import { getRamText, inAddressRange, RamAddress } from "./ram";
 
 //------------------------------------------------------
 // Build a list of "per opcode" documentation once
@@ -71,16 +71,6 @@ const getPreviousCharacter = (document: vscode.TextDocument, range: vscode.Range
   return document.getText(beforeRange);
 }
 
-const getRamAddresses = (entry: RamAddress, mask: number) => {
-  const options: string[] = [];
-  const padNum = mask.toString(16).length;
-  for (let i = 0; i < entry.length; i++) {
-    const addr = (entry.address + i) & mask;
-    options.push("$" + addr.toString(16).padStart(padNum, "0"));
-  }
-  return options;
-}
-
 const getRamHoverText = (
   document: vscode.TextDocument,
   position: vscode.Position,
@@ -91,7 +81,8 @@ const getRamHoverText = (
   const fourDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{4}\b/);
   if (fourDigits && '#' != getPreviousCharacter(document, fourDigits)) {
     const word = document.getText(fourDigits).toLowerCase();
-    const data = ramData.find(p => getRamAddresses(p, 0xFFFF).includes(word));
+    const num = parseInt(word.slice(1), 16);
+    const data = ramData.find(p => inAddressRange(p, num, 0xFFFF));
     if (data != undefined) {
       hoverText = getRamText(data);
     }
@@ -100,7 +91,8 @@ const getRamHoverText = (
   const sixDigits = document.getWordRangeAtPosition(position, /\$[0-9A-Fa-f]{6}\b/);
   if (sixDigits && '#' != getPreviousCharacter(document, sixDigits)) {
     const word = document.getText(sixDigits).toLowerCase();
-    const data = ramData.find(p => getRamAddresses(p, 0xFFFFFF).includes(word));
+    const num = parseInt(word.slice(1), 16);
+    const data = ramData.find(p => inAddressRange(p, num, 0xFFFFFF));
     if (data != undefined) {
       hoverText = getRamText(data);
     }
