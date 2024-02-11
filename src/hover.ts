@@ -4,32 +4,6 @@ import { ramSuperMetroid } from "./ramSuperMetroid";
 import { getRamText, inAddressRange, RamAddress } from "./ram";
 
 //------------------------------------------------------
-// Build a list of "per opcode" documentation once
-//------------------------------------------------------
-
-const docs: { code: string; docs: string }[] = [];
-
-Object.entries(asm.docs).forEach(d => {
-  d[0].split(' ').forEach(c => {
-    docs.push({
-      code: c,
-      docs: d[1]
-    })
-  })
-});
-
-//------------------------------------------------------
-//
-//------------------------------------------------------
-
-const getText = (name: string, description?: string) => {
-  if (description == undefined) {
-    return name;
-  }
-  return name + "  \n  \n" + description;
-}
-
-//------------------------------------------------------
 // Handle hovering over opcodes
 //------------------------------------------------------
 
@@ -61,10 +35,7 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
         }
       }
 
-      const h = docs.find(p => p.code == code);
-      if (h != undefined) {
-        hoverText += `  \n\n${h.docs}`;
-      }
+      hoverText += `  \n\n${a.docs}`;
       return new vscode.Hover(new vscode.MarkdownString(hoverText));
     }
 
