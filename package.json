@@ -1,7 +1,8 @@
 {
 	"name": "65816-snes-asm",
 	"displayName": "65816/SNES Assembly",
-	"version": "0.0.4",
+   "description": "65816/SNES Intellisense and Syntax Hilighting",
+	"version": "0.1.0",
    "icon": "images/icon.png",
 	"publisher": "MassHesteria",
 	"private": true,
@@ -19,6 +20,11 @@
 	"categories": [
 		"Programming Languages"
 	],
+   "keywords": [
+      "SNES",
+      "65816",
+      "Assembly"
+   ],
 	"contributes": {
 		"configuration": [
 			{
@@ -31,7 +37,7 @@
 							"none",
 							"Super Metroid"
 						],
-						"description": "Hover documentation for RAM/ROM addresses in SNES games."
+						"description": "Hover documentation for RAM addresses in SNES games."
 					}
 				}
 			}
