@@ -38,30 +38,47 @@ export const opcodeHoverProvider: vscode.HoverProvider = {
     document: vscode.TextDocument,
     position: vscode.Position,
     token: vscode.CancellationToken
-  ): vscode.Hover | Thenable<vscode.Hover> {
+  ): vscode.Hover | Thenable<vscode.Hover> | null {
     // Get the word under the cursor
     const wordRange = document.getWordRangeAtPosition(position);
     const word = wordRange ? document.getText(wordRange) : "";
 
-    // Define hover content based on the word
-    let hoverText = "";
-    const a = asm.opcodes.find(p => p.name == word);
+    // Trim opcode length specifiers
+    const code = /\.(b|w|l)$/.test(word) ? word.slice(0, -2) : word;
+
+    const a = asm.opcodes.find(p => p.name == code);
     if (a != undefined) {
-      const h = docs.find(p => p.code == word);
+      let hoverText = `**${a.description}**`;
+
+      if (word != code) {
+        const opcodeLen = word.at(word.length - 1);
+        if (opcodeLen == 'b') {
+          hoverText += " _(byte length)_";
+        } else if (opcodeLen == 'w') {
+          hoverText += " _(word length)_";
+        } else if (opcodeLen == 'l') {
+          hoverText += " _(long length)_";
+        }
+      }
+
+      const h = docs.find(p => p.code == code);
       if (h != undefined) {
-        hoverText = getText(a.description,h.docs);
+        hoverText += `  \n\n${h.docs}`;
       }
-    } else {
-      const config = vscode.workspace.getConfiguration("65816Snes");
-      const gameSupport = config.get<string>("gameSupport", "none");
-      if (gameSupport == "Super Metroid") {
-        hoverText = getRamHoverText(document, position, ramSuperMetroid);
-      }
+      return new vscode.Hover(new vscode.MarkdownString(hoverText));
     }
 
-    // Create a Hover object with the defined content
-    const hover = new vscode.Hover(new vscode.MarkdownString(hoverText));
-    return hover;
+    const config = vscode.workspace.getConfiguration("65816Snes");
+    const gameSupport = config.get<string>("gameSupport", "none");
+    if (gameSupport == "Super Metroid") {
+      return new vscode.Hover(
+        new vscode.MarkdownString(
+          getRamHoverText(document, position, ramSuperMetroid)
+        )
+      );
+    }
+
+    return null;
   },
 };
 
